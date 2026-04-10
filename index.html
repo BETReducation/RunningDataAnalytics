@@ -9,11 +9,7 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── THEME TOKENS ── */
-  :root {
-    --radius: 12px;
-    --radius-sm: 6px;
-  }
+  :root { --radius: 12px; --radius-sm: 6px; }
 
   [data-theme="dark"] {
     --bg:          #0b0f1a;
@@ -24,13 +20,12 @@
     --text:        #e2e8f4;
     --muted:       #6b7a99;
     --accent:      #4da6ff;
-    --accent-dim:  rgba(77,166,255,0.12);
+    --accent-dim:  rgba(77,166,255,0.10);
     --accent-text: #0b0f1a;
     --coral:       #f07a5a;
     --teal:        #4dd9c0;
     --shadow:      0 4px 24px rgba(0,0,0,0.4);
   }
-
   [data-theme="light"] {
     --bg:          #f0f4fb;
     --surface:     #ffffff;
@@ -48,66 +43,45 @@
   }
 
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; font-size: 15px; line-height: 1.6;
     transition: background 0.3s ease, color 0.3s ease;
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(11,15,26,0.85);
-    backdrop-filter: blur(14px);
+    background: rgba(11,15,26,0.85); backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex; align-items: center; gap: 2rem;
-    height: 56px;
+    padding: 0 2rem; display: flex; align-items: center; gap: 2rem; height: 56px;
     transition: background 0.3s ease;
   }
-  [data-theme="light"] nav {
-    background: rgba(240,244,251,0.88);
-  }
+  [data-theme="light"] nav { background: rgba(240,244,251,0.88); }
   .nav-logo {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800; font-size: 17px;
-    color: var(--accent); letter-spacing: -0.01em;
-    text-decoration: none;
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 17px;
+    color: var(--accent); letter-spacing: -0.01em; text-decoration: none;
   }
-  .nav-logo span {
-    font-weight: 300; color: var(--muted); font-size: 13px;
-    margin-left: 4px; letter-spacing: 0.02em;
-  }
+  .nav-logo span { font-weight: 300; color: var(--muted); font-size: 13px; margin-left: 4px; }
   .nav-links { display: flex; gap: 0; margin-left: auto; align-items: center; }
   .nav-links a {
     font-size: 13px; color: var(--muted); text-decoration: none;
     padding: 0 14px; height: 56px; display: flex; align-items: center;
-    transition: color 0.15s; letter-spacing: 0.01em;
+    transition: color 0.15s;
   }
   .nav-links a:hover, .nav-links a.active { color: var(--text); }
-
-  /* Theme toggle */
   .theme-toggle {
     width: 36px; height: 36px; border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--muted);
+    border: 1px solid var(--border2); background: var(--surface2); color: var(--muted);
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     margin-left: 8px; transition: all 0.15s; flex-shrink: 0;
   }
   .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
   .theme-toggle svg { width: 16px; height: 16px; }
 
-  /* ── HERO ── */
-  .hero {
-    padding: 80px 2rem 60px;
-    max-width: 760px; margin: 0 auto;
-  }
+  /* HERO */
+  .hero { padding: 80px 2rem 60px; max-width: 760px; margin: 0 auto; }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 6px;
     font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -115,104 +89,70 @@
     background: var(--accent-dim); border: 1px solid rgba(77,166,255,0.2);
     border-radius: 4px; padding: 4px 10px; margin-bottom: 24px;
   }
-  [data-theme="light"] .hero-tag {
-    border-color: rgba(26,127,232,0.2);
-  }
+  [data-theme="light"] .hero-tag { border-color: rgba(26,127,232,0.2); }
   .hero h1 {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800; font-size: clamp(34px, 6vw, 56px);
-    line-height: 1.05; letter-spacing: -0.03em;
-    color: var(--text); margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: clamp(34px, 6vw, 56px); line-height: 1.05;
+    letter-spacing: -0.03em; color: var(--text); margin-bottom: 20px;
   }
   .hero h1 span { color: var(--accent); }
-  .hero p {
-    font-size: 16px; color: var(--muted); max-width: 520px;
-    line-height: 1.7; margin-bottom: 36px;
-  }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 36px; }
   .hero-tools { display: flex; gap: 10px; flex-wrap: wrap; }
   .hero-tool-badge {
     font-size: 12px; font-family: 'JetBrains Mono', monospace;
     padding: 6px 14px; border-radius: 4px;
-    border: 1px solid var(--border2); color: var(--muted);
-    letter-spacing: 0.02em;
+    border: 1px solid var(--border2); color: var(--muted); letter-spacing: 0.02em;
   }
 
-  /* ── SECTION ── */
-  .section {
-    max-width: 760px; margin: 0 auto;
-    padding: 0 2rem 80px;
-  }
+  /* SECTION */
+  .section { max-width: 760px; margin: 0 auto; padding: 0 2rem 80px; }
   .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
   }
   .section-title {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700; font-size: 26px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 26px;
     letter-spacing: -0.02em; margin-bottom: 6px;
   }
-  .section-desc {
-    font-size: 14px; color: var(--muted);
-    margin-bottom: 28px; max-width: 500px;
-  }
-  .divider {
-    border: none; border-top: 1px solid var(--border);
-    margin: 0 auto 60px; max-width: 716px;
-  }
+  .section-desc { font-size: 14px; color: var(--muted); margin-bottom: 28px; max-width: 500px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 auto 60px; max-width: 716px; }
 
-  /* ── CARD ── */
+  /* CARD */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow);
   }
   .card-sm {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 16px;
   }
 
-  /* ── METRIC CARDS ── */
+  /* METRIC GRID */
   .metric-grid {
     display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
     gap: 10px; margin-bottom: 24px;
   }
   .metric-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 16px;
   }
   .metric-label {
-    font-size: 11px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.04em; margin-bottom: 6px;
-    text-transform: uppercase;
+    font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em; margin-bottom: 6px; text-transform: uppercase;
   }
   .metric-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 22px; font-weight: 500;
+    font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500;
     color: var(--accent); letter-spacing: -0.02em;
   }
-  .metric-sub {
-    font-size: 11px; color: var(--muted); margin-top: 2px;
-  }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-  /* ── SLIDER ── */
+  /* SLIDERS */
   .slider-row {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px; margin-bottom: 0;
   }
   .slider-row label {
-    font-size: 12px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.04em; white-space: nowrap;
-    text-transform: uppercase;
+    font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em; white-space: nowrap; text-transform: uppercase;
   }
   .slider-row input[type=range] {
     flex: 1; height: 4px; cursor: pointer;
@@ -220,20 +160,44 @@
     background: var(--border2); border-radius: 2px; outline: none;
   }
   .slider-row input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px; height: 18px; border-radius: 50%;
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
     background: var(--accent); cursor: pointer;
-    border: 3px solid var(--bg);
-    box-shadow: 0 0 0 1px var(--accent);
-    transition: background 0.3s;
+    border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent);
   }
+  .slider-row input[type=range]:disabled { opacity: 0.35; cursor: not-allowed; }
+  .slider-row input[type=range]:disabled::-webkit-slider-thumb { cursor: not-allowed; }
   .slider-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; font-weight: 500;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
     color: var(--text); min-width: 52px; text-align: right;
   }
 
-  /* ── REP LIST ── */
+  /* LOCKABLE SLIDER BLOCKS */
+  .slider-block {
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 12px 14px; margin-bottom: 10px; background: var(--surface2);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .slider-block.is-unlocked {
+    border-color: var(--accent); background: var(--accent-dim);
+  }
+  .slider-block-header {
+    display: flex; align-items: center; margin-bottom: 10px;
+  }
+  .slider-block-header .metric-label { margin-bottom: 0; flex: 1; }
+  .lock-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); cursor: pointer; background: none;
+    border: 1px solid var(--border2); border-radius: 4px; padding: 3px 8px;
+    transition: all 0.15s; white-space: nowrap;
+  }
+  .lock-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .lock-btn.is-unlocked { color: var(--accent); border-color: var(--accent); }
+  .lock-btn svg { width: 10px; height: 10px; }
+  .hm-slider-wrap { margin-bottom: 10px; }
+
+  /* REP LIST */
   .rep-row {
     display: flex; align-items: center; gap: 10px;
     padding: 9px 0; border-bottom: 1px solid var(--border);
@@ -243,143 +207,73 @@
     width: 28px; height: 28px; border-radius: 50%;
     background: var(--accent-dim); color: var(--accent);
     font-size: 12px; font-family: 'JetBrains Mono', monospace;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .rep-week {
-    font-size: 12px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    min-width: 52px;
-  }
-  .rep-bar-wrap {
-    flex: 1; height: 4px;
-    background: var(--border); border-radius: 2px; overflow: hidden;
-  }
-  .rep-bar {
-    height: 100%; border-radius: 2px;
-    background: var(--accent); transition: width 0.5s ease;
-  }
+  .rep-week { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; min-width: 52px; }
+  .rep-bar-wrap { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .rep-bar { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.5s ease; }
   .rep-time {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; font-weight: 500;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
     color: var(--text); min-width: 52px; text-align: right;
   }
   .badge {
-    font-size: 10px; padding: 2px 8px;
-    border-radius: 3px; font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.04em; min-width: 72px; text-align: center;
+    font-size: 10px; padding: 2px 8px; border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    min-width: 72px; text-align: center;
   }
   .badge-building    { background: rgba(77,217,192,0.15); color: var(--teal); }
-  .badge-progressing { background: rgba(240,122,90,0.15); color: var(--coral); }
-  .badge-ready       { background: rgba(77,166,255,0.15); color: var(--accent); }
+  .badge-progressing { background: rgba(240,122,90,0.15);  color: var(--coral); }
+  .badge-ready       { background: rgba(77,166,255,0.15);  color: var(--accent); }
 
-  /* ── STATS ROW ── */
-  .stats-row {
-    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: 10px; margin-top: 20px;
-  }
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 20px; }
 
-  /* ── PACE CALCULATOR ── */
-  .input-group {
-    display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
-  }
+  /* PACE CALC */
+  .input-group { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
   .input-group label {
-    font-size: 11px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    min-width: 100px;
+    font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em; text-transform: uppercase; min-width: 100px;
   }
   .input-group input[type=number], .input-group select {
     background: var(--surface2); border: 1px solid var(--border2);
     border-radius: var(--radius-sm); color: var(--text);
     font-family: 'JetBrains Mono', monospace; font-size: 14px;
-    padding: 8px 12px; width: 90px; outline: none;
-    transition: border-color 0.15s;
+    padding: 8px 12px; width: 90px; outline: none; transition: border-color 0.15s;
   }
-  .input-group input[type=number]:focus, .input-group select:focus {
-    border-color: var(--accent);
-  }
+  .input-group input[type=number]:focus, .input-group select:focus { border-color: var(--accent); }
   .input-group select { width: 130px; cursor: pointer; }
   .result-large {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 32px; font-weight: 500;
-    color: var(--accent); letter-spacing: -0.02em;
-    margin: 16px 0 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 500;
+    color: var(--accent); letter-spacing: -0.02em; margin: 16px 0 4px;
   }
   .result-label { font-size: 13px; color: var(--muted); }
 
-  /* ── HR ZONES ── */
-  .zone-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-  }
+  /* HR ZONES */
+  .zone-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .zone-row:last-child { border-bottom: none; }
-  .zone-bar-outer {
-    flex: 1; height: 6px;
-    background: var(--border); border-radius: 3px; overflow: hidden;
-  }
-  .zone-bar-inner {
-    height: 100%; border-radius: 3px;
-    transition: width 0.5s ease;
-  }
-  .zone-name {
-    font-size: 12px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    min-width: 80px;
-  }
-  .zone-range {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; color: var(--text);
-    min-width: 90px; text-align: right;
-  }
+  .zone-bar-outer { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .zone-bar-inner { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+  .zone-name { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; min-width: 80px; }
+  .zone-range { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); min-width: 90px; text-align: right; }
 
-  /* ── GUIDE SECTION ── */
-  .guide-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .guide-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  .guide-icon {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: var(--accent-dim);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px;
-  }
+  /* GUIDE */
+  .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .guide-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+  .guide-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
   .guide-icon svg { width: 16px; height: 16px; }
-  .guide-card h3 {
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px; font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .guide-card p {
-    font-size: 13px; color: var(--muted);
-    line-height: 1.6;
-  }
+  .guide-card h3 { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .guide-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 2rem;
-    max-width: 760px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  footer span {
-    font-size: 12px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-  }
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 24px 2rem; max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
   @media (max-width: 600px) {
-    .metric-grid  { grid-template-columns: repeat(2, 1fr); }
-    .stats-row    { grid-template-columns: 1fr 1fr; }
-    .guide-grid   { grid-template-columns: 1fr; }
-    nav           { padding: 0 1rem; }
-    .nav-links a  { padding: 0 10px; font-size: 12px; }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-row   { grid-template-columns: 1fr 1fr; }
+    .guide-grid  { grid-template-columns: 1fr; }
+    nav          { padding: 0 1rem; }
+    .nav-links a { padding: 0 10px; font-size: 12px; }
     .hero, .section { padding-left: 1rem; padding-right: 1rem; }
   }
 </style>
@@ -394,15 +288,12 @@
     <a href="#zones">HR Zones</a>
     <a href="#guide">Guide</a>
     <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">
-      <!-- sun icon shown in dark mode -->
       <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
       </svg>
-      <!-- moon icon shown in light mode -->
       <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
         <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
       </svg>
@@ -429,6 +320,7 @@
   <div class="section-desc">Set your goal race time. Get your target 800 m rep pace and a week-by-week progression plan.</div>
 
   <div class="card">
+    <!-- Metric display cards -->
     <div class="metric-grid">
       <div class="metric-card">
         <div class="metric-label">Goal HM time</div>
@@ -447,18 +339,70 @@
       </div>
       <div class="metric-card">
         <div class="metric-label">Total reps goal</div>
-        <div class="metric-value">10</div>
+        <div class="metric-value" id="reps-display">10</div>
         <div class="metric-sub">build to this</div>
       </div>
     </div>
 
-    <div class="slider-row">
-      <label>HM goal</label>
-      <input type="range" id="hm-slider" min="90" max="150" value="110" step="1">
-      <span class="slider-val" id="slider-display">1:50:00</span>
+    <!-- HM Goal slider (always active) -->
+    <div class="hm-slider-wrap">
+      <div class="slider-row" style="margin-bottom:0">
+        <label>HM goal</label>
+        <input type="range" id="hm-slider" min="90" max="150" value="110" step="1">
+        <span class="slider-val" id="slider-display">1:50:00</span>
+      </div>
     </div>
 
-    <div style="font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;">Progressive build</div>
+    <!-- Target 800 m slider (locked by default) -->
+    <div class="slider-block" id="block-800" style="margin-top:12px">
+      <div class="slider-block-header">
+        <div class="metric-label">Target 800 m</div>
+        <button class="lock-btn" id="lock-800" onclick="toggleLock('800')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          Locked to HM
+        </button>
+      </div>
+      <div class="slider-row">
+        <label>800 m rep</label>
+        <input type="range" id="slider-800" min="60" max="240" value="110" step="1" disabled>
+        <span class="slider-val" id="val-800">1:50</span>
+      </div>
+    </div>
+
+    <!-- Recovery jog slider (locked by default) -->
+    <div class="slider-block" id="block-rec">
+      <div class="slider-block-header">
+        <div class="metric-label">Recovery jog</div>
+        <button class="lock-btn" id="lock-rec" onclick="toggleLock('rec')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          Locked to 800 m
+        </button>
+      </div>
+      <div class="slider-row">
+        <label>Recovery</label>
+        <input type="range" id="slider-rec" min="60" max="300" value="110" step="1" disabled>
+        <span class="slider-val" id="val-rec">1:50</span>
+      </div>
+    </div>
+
+    <!-- Total reps goal slider (always free) -->
+    <div class="slider-block" id="block-reps" style="margin-bottom:20px">
+      <div class="slider-block-header">
+        <div class="metric-label">Total reps goal</div>
+      </div>
+      <div class="slider-row">
+        <label>Reps</label>
+        <input type="range" id="slider-reps" min="4" max="10" value="10" step="1" oninput="updateReps()">
+        <span class="slider-val" id="val-reps">10</span>
+      </div>
+    </div>
+
+    <!-- Progressive build table -->
+    <div style="font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Progressive build</div>
     <div id="rep-list"></div>
 
     <div class="stats-row">
@@ -469,13 +413,13 @@
       </div>
       <div class="card-sm">
         <div class="metric-label">Session distance</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0">~11 km</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0" id="session-dist">~11 km</div>
         <div class="metric-sub">incl. warm-up/cool-down</div>
       </div>
       <div class="card-sm">
         <div class="metric-label">Full session time</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0" id="session-dur">~62 min</div>
-        <div class="metric-sub">10-rep session</div>
+        <div class="metric-sub">at goal reps</div>
       </div>
     </div>
   </div>
@@ -488,7 +432,6 @@
   <div class="section-label">Tool 02</div>
   <div class="section-title">Race pace calculator</div>
   <div class="section-desc">Enter a finish time and distance to get your required pace per km or mile.</div>
-
   <div class="card">
     <div class="input-group">
       <label>Hours</label>
@@ -533,9 +476,8 @@
   <div class="section-label">Tool 03</div>
   <div class="section-title">Heart rate zones</div>
   <div class="section-desc">Enter your max heart rate to see your personalised training zones.</div>
-
   <div class="card">
-    <div class="slider-row">
+    <div class="slider-row" style="margin-bottom:20px">
       <label>Max HR</label>
       <input type="range" id="hr-slider" min="150" max="210" value="185" step="1" oninput="calcZones()">
       <span class="slider-val" id="hr-display">185 bpm</span>
@@ -551,7 +493,6 @@
   <div class="section-label">Guide</div>
   <div class="section-title">VO2 max training</div>
   <div class="section-desc">What you need to know before your first high-intensity session.</div>
-
   <div class="guide-grid">
     <div class="guide-card">
       <div class="guide-icon">
@@ -598,34 +539,26 @@
 </footer>
 
 <script>
-  /* ── THEME TOGGLE ── */
+  /* ── THEME ── */
   const html = document.documentElement;
   const btn  = document.getElementById('theme-btn');
   const sun  = document.getElementById('icon-sun');
   const moon = document.getElementById('icon-moon');
-
   function applyTheme(t) {
     html.setAttribute('data-theme', t);
     sun.style.display  = t === 'dark'  ? '' : 'none';
     moon.style.display = t === 'light' ? '' : 'none';
     localStorage.setItem('rda-theme', t);
   }
-
-  btn.addEventListener('click', () => {
-    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-
-  // Respect saved preference or system preference
+  btn.addEventListener('click', () => applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
   const saved = localStorage.getItem('rda-theme');
-  if (saved) {
-    applyTheme(saved);
-  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    applyTheme('light');
-  }
+  if (saved) applyTheme(saved);
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
 
   /* ── UTILS ── */
   function fmtMSS(sec) {
-    const m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    sec = Math.round(sec);
+    const m = Math.floor(sec / 60), s = sec % 60;
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
   function fmtHMS(min) {
@@ -633,34 +566,62 @@
     return h + ':' + (m < 10 ? '0' : '') + m + ':00';
   }
 
-  /* ── YASSO 800s ── */
-  const repData = [
-    [4, 'Week 1', 'building'],
-    [5, 'Week 2', 'building'],
-    [6, 'Week 3', 'progressing'],
-    [7, 'Week 4', 'progressing'],
-    [8, 'Week 5', 'progressing'],
-    [9, 'Week 6', 'ready'],
-    [10,'Week 7+','ready'],
-  ];
+  /* ── LOCK STATE ── */
+  const lockState = { '800': true, rec: true };
 
-  function updateYasso(hmMin) {
-    const repSec = hmMin * 60 / 60;
-    document.getElementById('hm-display').textContent   = fmtHMS(hmMin);
-    document.getElementById('slider-display').textContent = fmtHMS(hmMin);
-    document.getElementById('target-800').textContent   = fmtMSS(repSec);
-    document.getElementById('recovery-time').textContent = fmtMSS(repSec);
-    document.getElementById('km-pace').textContent = fmtMSS(repSec / 0.8);
-    const totalMin = Math.round(15 + 20 * (repSec / 60) + 10);
-    document.getElementById('session-dur').textContent = '~' + totalMin + ' min';
+  const LOCK_ICONS = {
+    locked: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+    unlocked: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>`
+  };
+
+  function toggleLock(key) {
+    lockState[key] = !lockState[key];
+    const block  = document.getElementById('block-' + key);
+    const lockBtn = document.getElementById('lock-' + key);
+    const slider = document.getElementById('slider-' + key);
+
+    if (lockState[key]) {
+      block.classList.remove('is-unlocked');
+      lockBtn.classList.remove('is-unlocked');
+      slider.disabled = true;
+      lockBtn.innerHTML = LOCK_ICONS.locked + (key === '800' ? ' Locked to HM' : ' Locked to 800 m');
+      // snap back to locked value
+      updateYasso(parseInt(document.getElementById('hm-slider').value));
+    } else {
+      block.classList.add('is-unlocked');
+      lockBtn.classList.add('is-unlocked');
+      slider.disabled = false;
+      lockBtn.innerHTML = LOCK_ICONS.unlocked + ' Unlocked';
+    }
+  }
+
+  /* ── YASSO ── */
+  let goalReps = 10;
+
+  function buildRepList(repSec) {
+    const maxReps = goalReps;
+    const startReps = Math.min(4, maxReps);
+    const steps = [];
+    for (let r = startReps; r <= maxReps; r++) steps.push(r);
+    // Always show a 7-row progression capped at goalReps
+    const repData = [];
+    if (maxReps <= 4) {
+      repData.push([maxReps, 'Week 1', 'ready']);
+    } else {
+      const total = maxReps - startReps + 1;
+      steps.forEach((r, i) => {
+        const week = i === 0 ? 'Week 1' : i === total - 1 ? 'Week ' + total + '+' : 'Week ' + (i + 1);
+        const pct = i / (total - 1);
+        const type = pct < 0.35 ? 'building' : pct < 0.7 ? 'progressing' : 'ready';
+        repData.push([r, week, type]);
+      });
+    }
 
     const list = document.getElementById('rep-list');
     list.innerHTML = '';
     repData.forEach(([reps, week, type]) => {
-      const pct = Math.round((reps / 10) * 100);
-      const badgeClass = type === 'building' ? 'badge-building'
-                       : type === 'progressing' ? 'badge-progressing'
-                       : 'badge-ready';
+      const pct = Math.round((reps / maxReps) * 100);
+      const badgeClass = type === 'building' ? 'badge-building' : type === 'progressing' ? 'badge-progressing' : 'badge-ready';
       const row = document.createElement('div');
       row.className = 'rep-row';
       row.innerHTML = `
@@ -674,24 +635,97 @@
     });
   }
 
-  const yassoSlider = document.getElementById('hm-slider');
-  yassoSlider.addEventListener('input', () => updateYasso(parseInt(yassoSlider.value)));
+  function getRepSec() {
+    if (lockState['800']) {
+      return parseInt(document.getElementById('hm-slider').value) * 60 / 60;
+    }
+    return parseInt(document.getElementById('slider-800').value);
+  }
+
+  function getRecSec() {
+    if (lockState['rec']) return getRepSec();
+    return parseInt(document.getElementById('slider-rec').value);
+  }
+
+  function updateYasso(hmMin) {
+    const repSec = lockState['800'] ? hmMin * 60 / 60 : getRepSec();
+    const recSec = lockState['rec'] ? repSec : getRecSec();
+
+    document.getElementById('hm-display').textContent    = fmtHMS(hmMin);
+    document.getElementById('slider-display').textContent = fmtHMS(hmMin);
+    document.getElementById('target-800').textContent    = fmtMSS(repSec);
+    document.getElementById('recovery-time').textContent = fmtMSS(recSec);
+    document.getElementById('reps-display').textContent  = goalReps;
+    document.getElementById('km-pace').textContent = fmtMSS(repSec / 0.8);
+
+    // Sync locked sliders visually
+    if (lockState['800']) {
+      document.getElementById('slider-800').value = repSec;
+      document.getElementById('val-800').textContent = fmtMSS(repSec);
+    }
+    if (lockState['rec']) {
+      document.getElementById('slider-rec').value = recSec;
+      document.getElementById('val-rec').textContent = fmtMSS(recSec);
+    }
+
+    // Session stats
+    const warmCool = 25 * 60; // 25 min warm+cool in seconds
+    const sessionSec = warmCool + goalReps * repSec + (goalReps - 1) * recSec;
+    const sessionMin = Math.round(sessionSec / 60);
+    const distKm = Math.round((2 + goalReps * 0.8 + (goalReps - 1) * 0.3) * 10) / 10;
+    document.getElementById('session-dur').textContent  = '~' + sessionMin + ' min';
+    document.getElementById('session-dist').textContent = '~' + distKm + ' km';
+
+    buildRepList(repSec);
+  }
+
+  function updateReps() {
+    goalReps = parseInt(document.getElementById('slider-reps').value);
+    document.getElementById('val-reps').textContent = goalReps;
+    updateYasso(parseInt(document.getElementById('hm-slider').value));
+  }
+
+  document.getElementById('hm-slider').addEventListener('input', e => updateYasso(parseInt(e.target.value)));
+
+  document.getElementById('slider-800').addEventListener('input', e => {
+    const sec = parseInt(e.target.value);
+    document.getElementById('val-800').textContent = fmtMSS(sec);
+    document.getElementById('target-800').textContent = fmtMSS(sec);
+    document.getElementById('km-pace').textContent = fmtMSS(sec / 0.8);
+    if (lockState['rec']) {
+      document.getElementById('slider-rec').value = sec;
+      document.getElementById('val-rec').textContent = fmtMSS(sec);
+      document.getElementById('recovery-time').textContent = fmtMSS(sec);
+    }
+    buildRepList(sec);
+  });
+
+  document.getElementById('slider-rec').addEventListener('input', e => {
+    const sec = parseInt(e.target.value);
+    document.getElementById('val-rec').textContent = fmtMSS(sec);
+    document.getElementById('recovery-time').textContent = fmtMSS(sec);
+    // Recalc session time
+    const repSec = getRepSec();
+    const sessionSec = 25 * 60 + goalReps * repSec + (goalReps - 1) * sec;
+    document.getElementById('session-dur').textContent = '~' + Math.round(sessionSec / 60) + ' min';
+  });
+
   updateYasso(110);
 
-  /* ── PACE CALCULATOR ── */
+  /* ── PACE CALC ── */
   function calcPace() {
-    const h    = parseInt(document.getElementById('pace-h').value) || 0;
-    const m    = parseInt(document.getElementById('pace-m').value) || 0;
-    const s    = parseInt(document.getElementById('pace-s').value) || 0;
+    const h = parseInt(document.getElementById('pace-h').value) || 0;
+    const m = parseInt(document.getElementById('pace-m').value) || 0;
+    const s = parseInt(document.getElementById('pace-s').value) || 0;
     const dist = parseFloat(document.getElementById('pace-dist').value);
     const totalSec = h * 3600 + m * 60 + s;
     if (!totalSec || !dist) return;
     const paceKm   = totalSec / dist;
     const paceMile = paceKm * 1.60934;
     const split5k  = paceKm * 5;
-    document.getElementById('pace-result').textContent    = fmtMSS(paceKm);
-    document.getElementById('pace-mile').textContent      = fmtMSS(paceMile);
-    document.getElementById('pace-5k-split').textContent  = fmtMSS(split5k);
+    document.getElementById('pace-result').textContent   = fmtMSS(paceKm);
+    document.getElementById('pace-mile').textContent     = fmtMSS(paceMile);
+    document.getElementById('pace-5k-split').textContent = fmtMSS(split5k);
   }
   calcPace();
 
@@ -703,16 +737,15 @@
     { name: 'Z4 Threshold', pct: [80, 90], color: '#f0a35a' },
     { name: 'Z5 VO2 max',   pct: [90,100], color: '#f07a5a' },
   ];
-
   function calcZones() {
     const maxHR = parseInt(document.getElementById('hr-slider').value);
     document.getElementById('hr-display').textContent = maxHR + ' bpm';
     const list = document.getElementById('zone-list');
     list.innerHTML = '';
     zones.forEach(z => {
-      const lo   = Math.round(maxHR * z.pct[0] / 100);
-      const hi   = Math.round(maxHR * z.pct[1] / 100);
-      const barW = (z.pct[1] - z.pct[0]) * 2;
+      const lo = Math.round(maxHR * z.pct[0] / 100);
+      const hi = Math.round(maxHR * z.pct[1] / 100);
+      const barW   = (z.pct[1] - z.pct[0]) * 2;
       const barOff = (z.pct[0] - 50) * 2;
       const row = document.createElement('div');
       row.className = 'zone-row';
@@ -726,11 +759,10 @@
       list.appendChild(row);
     });
   }
-
   document.getElementById('hr-slider').addEventListener('input', calcZones);
   calcZones();
 
-  /* ── NAV ACTIVE STATE ── */
+  /* ── NAV ── */
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', function() {
       document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('active'));
