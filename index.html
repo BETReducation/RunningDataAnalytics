@@ -438,7 +438,7 @@
 
     <!-- STRENGTH -->
     <div class="tp-panel" id="plan4">
-      <div class="tp-phase-desc">Home workouts on non-running days (Sun, Tue, Fri). Focus on glutes, single-leg stability, core, and hip flexors. 30–40 min per session. Rotate A → B → C.</div>
+      <div class="tp-phase-desc">Home workouts on non-running days (Tue, Fri, Sun). Focus on glutes, single-leg stability, core, and hip flexors. 30–40 min per session. Rotate A → B → C.</div>
       <div class="tp-sub-tabs" id="strengthSubTabs">
         <button class="tp-sub-btn active" data-st="stA">Session A — Glute & Hip</button>
         <button class="tp-sub-btn" data-st="stB">Session B — Core & Stability</button>
@@ -481,13 +481,13 @@
       <div class="tp-strength-card">
         <div class="tp-strength-title">Weekly schedule</div>
         <ul class="tp-strength-list">
-          <li><strong>Saturday</strong> — Long run</li>
-          <li><strong>Sunday</strong> — Rest (or Strength A)</li>
           <li><strong>Monday</strong> — Intervals</li>
           <li><strong>Tuesday</strong> — Rest (or Strength B)</li>
           <li><strong>Wednesday</strong> — Easy run</li>
           <li><strong>Thursday</strong> — Threshold / tempo</li>
           <li><strong>Friday</strong> — Rest (or Strength C)</li>
+          <li><strong>Saturday</strong> — Long run</li>
+          <li><strong>Sunday</strong> — Rest (or Strength A)</li>
         </ul>
       </div>
     </div>
@@ -715,13 +715,13 @@ function generatePlan(){
     const focus   = dl ? 'Deload — recovery week' : (i===0?'Establish routine':i<2?'Gentle progression':i<baseLen-1?'Building rhythm':'Aerobic confidence');
 
     phase0Weeks.push(makeWeek(weekCounter++, focus, vol, dl, [
-      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${dl?' — very easy':''}` },
-      {d:'Sun',t:'rest',     w:'Rest'},
       {d:'Mon',t:'intervals',w:`${intReps}×${intDist} @ ${intPace}/km · ${intKm} km total`},
       {d:'Tue',t:'rest',     w:'Rest'},
       {d:'Wed',t:'easy',     w:`Easy run ${easyKm} km @ ${fmtMSS(easyP)}/km`},
       {d:'Thu',t:'tempo',    w:`${dl?'15':'20–22'} min tempo @ ${fmtMSS(rp(thP+15))}/km · ${tempoKm} km total`},
       {d:'Fri',t:'strength', w:dl?'Rest or gentle walk':`Session ${['A','B','C'][i%3]} — ${['glute & hip','core & stability','mobility'][i%3]} (or rest)`},
+      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${dl?' — very easy':''}` },
+      {d:'Sun',t:'rest',     w:'Rest'},
     ]));
   }
 
@@ -742,13 +742,13 @@ function generatePlan(){
     const focus   = dl ? 'Deload — recovery week' : (i===0?'Introduce 1 km reps':i<2?'Volume building':i===buildLen-1?'Volume peak + race feel':'Stronger base');
 
     phase1Weeks.push(makeWeek(weekCounter++, focus, vol, dl, [
-      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${i===buildLen-1?' — last 2 km @ '+fmtMSS(raceP)+'/km (race feel)':''}`},
-      {d:'Sun',t:'rest',     w:'Rest'},
       {d:'Mon',t:'intervals',w:`${intReps}×1 km @ ${fmtMSS(intBP)}/km with 90 s jog · ${intKm} km total`},
       {d:'Tue',t:'rest',     w:'Rest'},
       {d:'Wed',t:'easy',     w:`Easy run ${easyKm} km @ ${fmtMSS(easyP)}/km`},
       {d:'Thu',t:'tempo',    w:`${tempoMin} min @ ${fmtMSS(thP)}/km · ${tempoKm} km total`},
       {d:'Fri',t:'strength', w:dl?'Session C — mobility only':`Session ${['A','B','C'][i%3]} (or rest)`},
+      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${i===buildLen-1?' — last 2 km @ '+fmtMSS(raceP)+'/km (race feel)':''}`},
+      {d:'Sun',t:'rest',     w:'Rest'},
     ]));
   }
 
@@ -772,21 +772,21 @@ function generatePlan(){
     const focus  = tuneUp ? 'Tune-up race — 5k' : (dl ? 'Deload — recovery week' : (i===0?'Race-specific intensity':i===sharpLen-1?'Sharpener — final peak':'Back to quality'));
 
     phase2Weeks.push(makeWeek(weekCounter++, focus, vol, dl, tuneUp ? [
-      {d:'Sat',t:'race',     w:'Parkrun 5k or time trial — go for it!'},
-      {d:'Sun',t:'long',     w:`Long run ${Math.round(longKm*0.85)} km easy @ ${fmtMSS(longP)}/km`},
       {d:'Mon',t:'intervals',w:`5×1 km @ ${fmtMSS(intBP)}/km · ${intKm} km total`},
       {d:'Tue',t:'rest',     w:'Rest'},
       {d:'Wed',t:'easy',     w:`Easy run ${easyKm} km — legs fresh`},
       {d:'Thu',t:'tempo',    w:`22 min @ ${fmtMSS(thP)}/km · ${tempoKm} km total`},
       {d:'Fri',t:'rest',     w:'Rest'},
+      {d:'Sat',t:'race',     w:'Parkrun 5k or time trial — go for it!'},
+      {d:'Sun',t:'long',     w:`Long run ${Math.round(longKm*0.85)} km easy @ ${fmtMSS(longP)}/km`},
     ] : [
-      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${i===sharpLen-1?'':' with last 3 km @ '+fmtMSS(raceP)+'/km'}`},
-      {d:'Sun',t:'rest',     w:'Rest'},
       {d:'Mon',t:'intervals',w:`${intReps}×800 m @ ${fmtMSS(intCP)}/km · ${intKm} km total`},
       {d:'Tue',t:'rest',     w:'Rest'},
       {d:'Wed',t:'easy',     w:`Easy run ${easyKm} km @ ${fmtMSS(easyP)}/km`},
       {d:'Thu',t:'tempo',    w:`${tempoMin} min @ ${fmtMSS(thP)}/km · ${tempoKm} km total`},
       {d:'Fri',t:'strength', w:dl?'Rest':`Session ${['A','B','C'][i%3]} (or rest)`},
+      {d:'Sat',t:'long',     w:`Long run ${longKm} km @ ${fmtMSS(longP)}/km${i===sharpLen-1?'':' with last 3 km @ '+fmtMSS(raceP)+'/km'}`},
+      {d:'Sun',t:'rest',     w:'Rest'},
     ]));
   }
 
@@ -798,21 +798,21 @@ function generatePlan(){
     const lastWeek = i === taperLen-1;
     const vol = lastWeek ? tVol2 : tVol1;
     phase3Weeks.push(makeWeek(weekCounter++, lastWeek?'Race week':'Taper — keep sharp', vol, false, lastWeek ? [
-      {d:'Sat',t:'rest',     w:'Rest. Light walk. Eat well but not heavily.'},
-      {d:'Sun',t:'race',     w:`Race day — target ${planTarget}:00. Go out at ${fmtMSS(raceP)}/km and hold it.`},
       {d:'Mon',t:'rest',     w:'Rest or 20 min easy walk'},
       {d:'Tue',t:'easy',     w:'20 min easy jog + 4×100 m strides'},
       {d:'Wed',t:'rest',     w:'Rest'},
       {d:'Thu',t:'easy',     w:'15 min easy jog — shake the legs'},
       {d:'Fri',t:'rest',     w:'Rest. Prepare kit, plan travel to start, sleep early.'},
+      {d:'Sat',t:'rest',     w:'Rest. Light walk. Eat well but not heavily.'},
+      {d:'Sun',t:'race',     w:`Race day — target ${planTarget}:00. Go out at ${fmtMSS(raceP)}/km and hold it.`},
     ] : [
-      {d:'Sat',t:'easy',     w:`Easy run ${Math.round(vol*0.35)} km @ ${fmtMSS(easyP)}/km — feel the freshness`},
-      {d:'Sun',t:'rest',     w:'Rest'},
       {d:'Mon',t:'intervals',w:`4×400 m @ ${fmtMSS(intCP)}/km + 4×100 m strides · ${Math.round(vol*0.22)} km total`},
       {d:'Tue',t:'rest',     w:'Rest'},
       {d:'Wed',t:'easy',     w:`Easy run ${Math.round(vol*0.25)} km @ ${fmtMSS(easyP)}/km`},
       {d:'Thu',t:'tempo',    w:`12 min @ ${fmtMSS(thP)}/km + cool down · ${Math.round(vol*0.18)} km total`},
       {d:'Fri',t:'strength', w:'Session C — mobility only'},
+      {d:'Sat',t:'easy',     w:`Easy run ${Math.round(vol*0.35)} km @ ${fmtMSS(easyP)}/km — feel the freshness`},
+      {d:'Sun',t:'rest',     w:'Rest'},
     ]));
   }
 
