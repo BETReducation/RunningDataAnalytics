@@ -6,10 +6,10 @@
 // Firebase console -> Project settings -> General -> Your apps -> Web app -> SDK setup.
 
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyD9-XcmFhnjApFKXKC3OM6Ld8QQl5Teyvc",
+  authDomain: "running-data-analytics.firebaseapp.com",
+  projectId: "running-data-analytics",
+  storageBucket: "running-data-analytics.firebasestorage.app",
+  messagingSenderId: "152485344639",
+  appId: "1:152485344639:web:902611168bccd396b7564a",
 };
