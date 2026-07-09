@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Progress — RDA</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0f1a">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-nav"></div>
+
+<main id="app-content" hidden>
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">Progress</div>
+    <div class="page-desc">Set race goals and watch yourself close the gap.</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title" style="font-size:16px;margin-bottom:16px">Add a goal</div>
+    <form id="goal-form">
+      <div class="form-field">
+        <label for="g-name">Race name</label>
+        <input type="text" id="g-name" placeholder="e.g. City 10k" required>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label for="g-distance">Distance</label>
+          <select id="g-distance">
+            <option value="5">5 km</option>
+            <option value="10" selected>10 km</option>
+            <option value="21.0975">Half marathon</option>
+            <option value="42.195">Marathon</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-field" id="g-distance-custom-wrap" style="display:none">
+          <label for="g-distance-custom">Custom distance (km)</label>
+          <input type="number" id="g-distance-custom" inputmode="decimal" step="0.01" min="0">
+        </div>
+        <div class="form-field" id="g-date-wrap">
+          <label for="g-date">Race date</label>
+          <input type="date" id="g-date">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Target time</label>
+        <div class="duration-inputs">
+          <input type="number" id="g-h" inputmode="numeric" min="0" max="23" placeholder="0">
+          <input type="number" id="g-m" inputmode="numeric" min="0" max="59" placeholder="55">
+          <input type="number" id="g-s" inputmode="numeric" min="0" max="59" placeholder="00">
+        </div>
+        <div class="duration-labels"><span>Hours</span><span>Mins</span><span>Secs</span></div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Add goal</button>
+    </form>
+  </div>
+
+  <div id="goal-list" style="margin-top:24px"></div>
+
+</div>
+</main>
+
+<script type="module" src="js/progress.js"></script>
+</body>
+</html>

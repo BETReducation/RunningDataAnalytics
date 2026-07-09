@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tools — RDA</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0f1a">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-nav"></div>
+
+<main id="app-content" hidden>
+
+<section class="hero">
+  <div class="hero-tag">Running tools</div>
+  <h1>Train smarter,<br>race <span>faster</span>.</h1>
+  <p>Free calculators and training guides for runners chasing their next PB — from first VO2 max session to race day.</p>
+  <div class="hero-tools">
+    <div class="hero-tool-badge">Yasso 800s</div>
+    <div class="hero-tool-badge">Pace calculator</div>
+    <div class="hero-tool-badge">HR zones</div>
+    <div class="hero-tool-badge">10k training plan</div>
+    <div class="hero-tool-badge">VO2 max guide</div>
+  </div>
+</section>
+
+<nav class="tools-subnav">
+  <a href="#yasso" class="active">Yasso 800s</a>
+  <a href="#pace">Pace</a>
+  <a href="#zones">HR Zones</a>
+  <a href="#plan">10k Plan</a>
+  <a href="#guide">Guide</a>
+</nav>
+
+<!-- YASSO 800s -->
+<section class="section" id="yasso" style="padding-top:32px">
+  <div class="section-label">Tool 01</div>
+  <div class="section-title">Yasso 800 calculator</div>
+  <div class="section-desc">Set your goal race time. Get your target 800 m rep pace and a week-by-week progression plan.</div>
+  <div class="card">
+    <div class="metric-grid">
+      <div class="metric-card"><div class="metric-label">Goal HM time</div><div class="metric-value" id="hm-display">1:50:00</div><div class="metric-sub">target</div></div>
+      <div class="metric-card"><div class="metric-label">Target 800 m</div><div class="metric-value" id="target-800">1:50</div><div class="metric-sub">per rep</div></div>
+      <div class="metric-card"><div class="metric-label">Recovery jog</div><div class="metric-value" id="recovery-time">1:50</div><div class="metric-sub">equal time</div></div>
+      <div class="metric-card"><div class="metric-label">Total reps goal</div><div class="metric-value" id="reps-display">10</div><div class="metric-sub">build to this</div></div>
+    </div>
+    <div class="hm-slider-wrap">
+      <div class="slider-row" style="margin-bottom:0">
+        <label>HM goal</label>
+        <input type="range" id="hm-slider" min="90" max="150" value="110" step="1">
+        <span class="slider-val" id="slider-display">1:50:00</span>
+      </div>
+    </div>
+    <div class="slider-block" id="block-800" style="margin-top:12px">
+      <div class="slider-block-header">
+        <div class="metric-label">Target 800 m</div>
+        <button class="lock-btn" id="lock-800">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Locked to HM
+        </button>
+      </div>
+      <div class="slider-row">
+        <label>800 m rep</label>
+        <input type="range" id="slider-800" min="60" max="240" value="110" step="1" disabled>
+        <span class="slider-val" id="val-800">1:50</span>
+      </div>
+    </div>
+    <div class="slider-block" id="block-rec">
+      <div class="slider-block-header">
+        <div class="metric-label">Recovery jog</div>
+        <button class="lock-btn" id="lock-rec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Locked to 800 m
+        </button>
+      </div>
+      <div class="slider-row">
+        <label>Recovery</label>
+        <input type="range" id="slider-rec" min="60" max="300" value="110" step="1" disabled>
+        <span class="slider-val" id="val-rec">1:50</span>
+      </div>
+    </div>
+    <div class="slider-block" id="block-reps" style="margin-bottom:20px">
+      <div class="slider-block-header"><div class="metric-label">Total reps goal</div></div>
+      <div class="slider-row">
+        <label>Reps</label>
+        <input type="range" id="slider-reps" min="4" max="10" value="10" step="1">
+        <span class="slider-val" id="val-reps">10</span>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Progressive build</div>
+    <div id="rep-list"></div>
+    <div class="stats-row">
+      <div class="card-sm"><div class="metric-label">Equiv. km pace</div><div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0" id="km-pace">2:18</div><div class="metric-sub">per km</div></div>
+      <div class="card-sm"><div class="metric-label">Session distance</div><div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0" id="session-dist">~11 km</div><div class="metric-sub">incl. warm-up/cool-down</div></div>
+      <div class="card-sm"><div class="metric-label">Full session time</div><div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);margin:4px 0" id="session-dur">~62 min</div><div class="metric-sub">at goal reps</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PACE CALCULATOR -->
+<section class="section" id="pace">
+  <div class="section-label">Tool 02</div>
+  <div class="section-title">Race pace calculator</div>
+  <div class="section-desc">Enter a finish time and distance to get your required pace per km or mile.</div>
+  <div class="card">
+    <div class="input-group"><label>Hours</label><input type="number" id="pace-h" min="0" max="9" value="1"></div>
+    <div class="input-group"><label>Minutes</label><input type="number" id="pace-m" min="0" max="59" value="50"></div>
+    <div class="input-group"><label>Seconds</label><input type="number" id="pace-s" min="0" max="59" value="0"></div>
+    <div class="input-group">
+      <label>Distance</label>
+      <select id="pace-dist">
+        <option value="5">5 km</option>
+        <option value="10">10 km</option>
+        <option value="21.0975" selected>Half marathon</option>
+        <option value="42.195">Marathon</option>
+      </select>
+    </div>
+    <div class="result-large" id="pace-result">5:14</div>
+    <div class="result-label">min / km required</div>
+    <div style="display:flex;gap:20px;margin-top:16px;">
+      <div><div class="metric-label">Per mile</div><div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--text);margin-top:4px" id="pace-mile">8:25</div></div>
+      <div><div class="metric-label">Splits every 5 km</div><div style="font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--text);margin-top:4px" id="pace-5k-split">26:10</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HEART RATE ZONES -->
+<section class="section" id="zones">
+  <div class="section-label">Tool 03</div>
+  <div class="section-title">Heart rate zones</div>
+  <div class="section-desc">Enter your max heart rate to see your personalised training zones.</div>
+  <div class="card">
+    <div class="slider-row" style="margin-bottom:20px">
+      <label>Max HR</label>
+      <input type="range" id="hr-slider" min="150" max="210" value="185" step="1">
+      <span class="slider-val" id="hr-display">185 bpm</span>
+    </div>
+    <div id="zone-list"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 10K TRAINING PLAN -->
+<section class="section" id="plan">
+  <div class="section-label">Tool 04</div>
+  <div class="section-title" id="plan-title">10k training plan</div>
+  <div class="section-desc" id="plan-desc">Adjust the sliders to personalise your plan — all paces, distances, and session details update automatically.</div>
+
+  <div class="card">
+
+    <div class="plan-sliders">
+      <div class="plan-sliders-title">Your settings</div>
+      <div class="plan-slider-row">
+        <span class="plan-slider-label">Race target</span>
+        <input type="range" id="sl-target" min="35" max="70" value="50" step="1">
+        <span class="plan-slider-val" id="sv-target">50:00</span>
+      </div>
+      <div class="plan-slider-row">
+        <span class="plan-slider-label">Current 10k</span>
+        <input type="range" id="sl-current" min="40" max="90" value="59" step="1">
+        <span class="plan-slider-val" id="sv-current">59:00</span>
+      </div>
+      <div class="plan-slider-row">
+        <span class="plan-slider-label">Weeks available</span>
+        <input type="range" id="sl-weeks" min="8" max="24" value="19" step="1">
+        <span class="plan-slider-val" id="sv-weeks">19 wks</span>
+      </div>
+    </div>
+
+    <div class="plan-metrics">
+      <div class="plan-metric"><div class="plan-metric-label">Race pace</div><div class="plan-metric-val" id="pm-race">5:00</div><div class="plan-metric-sub">per km target</div></div>
+      <div class="plan-metric"><div class="plan-metric-label">Intervals</div><div class="plan-metric-val" id="pm-int">4:50</div><div class="plan-metric-sub">per km · sharpen phase</div></div>
+      <div class="plan-metric"><div class="plan-metric-label">Threshold</div><div class="plan-metric-val" id="pm-thresh">5:15</div><div class="plan-metric-sub">per km · comfortably hard</div></div>
+      <div class="plan-metric"><div class="plan-metric-label">Easy / Long</div><div class="plan-metric-val" id="pm-easy">6:30</div><div class="plan-metric-sub">per km · conversational</div></div>
+    </div>
+
+    <div class="tp-phase-tabs" id="tpPhaseTabs">
+      <button class="tp-phase-btn active" data-tp="plan0">Phase 1 — Base</button>
+      <button class="tp-phase-btn" data-tp="plan1">Phase 2 — Build</button>
+      <button class="tp-phase-btn" data-tp="plan2">Phase 3 — Sharpen</button>
+      <button class="tp-phase-btn" data-tp="plan3">Phase 4 — Taper</button>
+      <button class="tp-phase-btn" data-tp="plan4">Strength</button>
+      <button class="tp-phase-btn" data-tp="plan5">Injury rules</button>
+    </div>
+
+    <div class="tp-panel active" id="plan0">
+      <div class="tp-phase-desc" id="ph0-desc">Build aerobic capacity with conservative mileage. Easy pace is the priority. No heroics yet.</div>
+      <div class="tp-pace-grid">
+        <div class="tp-pace-card"><div class="tp-pace-label">Easy / Long</div><div class="tp-pace-val" id="ph0-easy">—</div><div class="tp-pace-sub">per km · conversational</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Threshold</div><div class="tp-pace-val" id="ph0-thresh">—</div><div class="tp-pace-sub">per km · comfortably hard</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Intervals</div><div class="tp-pace-val" id="ph0-int">—</div><div class="tp-pace-sub">per km · at goal pace</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Weekly volume</div><div class="tp-pace-val" id="ph0-vol">—</div><div class="tp-pace-sub">4 runs · &lt;10% increase</div></div>
+      </div>
+      <div class="tp-week-list" id="tp-phase0-weeks"></div>
+    </div>
+
+    <div class="tp-panel" id="plan1">
+      <div class="tp-phase-desc" id="ph1-desc">Progressive loading. Intervals get longer, tempo extends. Long run peaks. Deload every 4th week.</div>
+      <div class="tp-pace-grid">
+        <div class="tp-pace-card"><div class="tp-pace-label">Easy / Long</div><div class="tp-pace-val" id="ph1-easy">—</div><div class="tp-pace-sub">per km</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Threshold</div><div class="tp-pace-val" id="ph1-thresh">—</div><div class="tp-pace-sub">per km · 20–25 min blocks</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Intervals (1 km)</div><div class="tp-pace-val" id="ph1-int">—</div><div class="tp-pace-sub">per km · 5–6 reps</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Weekly volume</div><div class="tp-pace-val" id="ph1-vol">—</div><div class="tp-pace-sub">peak load phase</div></div>
+      </div>
+      <div class="tp-week-list" id="tp-phase1-weeks"></div>
+    </div>
+
+    <div class="tp-panel" id="plan2">
+      <div class="tp-phase-desc" id="ph2-desc">Race-specific sharpening. Intervals at or faster than goal pace. Tune-up 5k in the middle. Quality over quantity.</div>
+      <div class="tp-pace-grid">
+        <div class="tp-pace-card"><div class="tp-pace-label">Easy / Long</div><div class="tp-pace-val" id="ph2-easy">—</div><div class="tp-pace-sub">per km</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Threshold</div><div class="tp-pace-val" id="ph2-thresh">—</div><div class="tp-pace-sub">per km · 25–30 min</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Intervals (1 km)</div><div class="tp-pace-val" id="ph2-int">—</div><div class="tp-pace-sub">per km · sub goal pace</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Weekly volume</div><div class="tp-pace-val" id="ph2-vol">—</div><div class="tp-pace-sub">held then reducing</div></div>
+      </div>
+      <div class="tp-week-list" id="tp-phase2-weeks"></div>
+    </div>
+
+    <div class="tp-panel" id="plan3">
+      <div class="tp-phase-desc" id="ph3-desc">Volume drops sharply. Keep intensity but shorten sessions. Trust the training — your legs need to feel fresh on race day.</div>
+      <div class="tp-pace-grid">
+        <div class="tp-pace-card"><div class="tp-pace-label">Easy</div><div class="tp-pace-val" id="ph3-easy">—</div><div class="tp-pace-sub">per km · feel fresh</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Strides (100 m)</div><div class="tp-pace-val" id="ph3-strides">—</div><div class="tp-pace-sub">per km · leg speed</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Race goal</div><div class="tp-pace-val" id="ph3-race">—</div><div class="tp-pace-sub">per km on the day</div></div>
+        <div class="tp-pace-card"><div class="tp-pace-label">Weekly volume</div><div class="tp-pace-val" id="ph3-vol">—</div><div class="tp-pace-sub">taper — trust it</div></div>
+      </div>
+      <div class="tp-week-list" id="tp-phase3-weeks"></div>
+    </div>
+
+    <div class="tp-panel" id="plan4">
+      <div class="tp-phase-desc">Home workouts on non-running days (Tue, Fri, Sun). Focus on glutes, single-leg stability, core, and hip flexors. 30–40 min per session. Rotate A → B → C.</div>
+      <div class="tp-sub-tabs" id="strengthSubTabs">
+        <button class="tp-sub-btn active" data-st="stA">Session A — Glute & Hip</button>
+        <button class="tp-sub-btn" data-st="stB">Session B — Core & Stability</button>
+        <button class="tp-sub-btn" data-st="stC">Session C — Mobility</button>
+      </div>
+      <div id="stA" class="tp-strength-grid">
+        <div class="tp-strength-card"><div class="tp-strength-title">Glute activation (10 min)</div><ul class="tp-strength-list"><li>Glute bridges — 3×15 reps</li><li>Single-leg glute bridge — 3×10 each</li><li>Clamshells with band — 3×15 each</li><li>Side-lying hip abduction — 3×15 each</li><li>Donkey kicks — 2×15 each</li></ul></div>
+        <div class="tp-strength-card"><div class="tp-strength-title">Hip & knee strength (20 min)</div><ul class="tp-strength-list"><li>Bulgarian split squat (bodyweight) — 3×8 each</li><li>Reverse lunge — 3×10 each</li><li>Step-ups onto chair — 3×10 each</li><li>Wall sit — 3×30 sec</li><li>Lateral band walks — 3×12 each way</li></ul></div>
+      </div>
+      <div id="stB" class="tp-strength-grid" style="display:none">
+        <div class="tp-strength-card"><div class="tp-strength-title">Core (15 min)</div><ul class="tp-strength-list"><li>Dead bug — 3×10 each side</li><li>Bird dog — 3×10 each side</li><li>Plank — 3×30–45 sec</li><li>Side plank — 2×20 sec each</li><li>Pallof press (band) — 3×12 each</li></ul></div>
+        <div class="tp-strength-card"><div class="tp-strength-title">Single-leg stability (20 min)</div><ul class="tp-strength-list"><li>Single-leg balance — 3×30 sec each</li><li>Single-leg squat (to chair) — 3×8 each</li><li>Single-leg calf raise (straight knee) — 3×12 each</li><li>Single-leg calf raise (bent knee) — 3×12 each</li><li>Heel walks + toe walks — 2×20 m each</li></ul></div>
+      </div>
+      <div id="stC" class="tp-strength-grid" style="display:none">
+        <div class="tp-strength-card"><div class="tp-strength-title">Hip flexor & IT band (20 min)</div><ul class="tp-strength-list"><li>90/90 hip stretch — 2 min each side</li><li>Pigeon pose — 2 min each side</li><li>Couch stretch — 90 sec each</li><li>Lateral hip opening — 2 min each</li><li>IT band foam roll — 60 sec each</li></ul></div>
+        <div class="tp-strength-card"><div class="tp-strength-title">Calf & lower leg (15 min)</div><ul class="tp-strength-list"><li>Calf foam roll — 60 sec each</li><li>Seated calf stretch — 90 sec each</li><li>Standing calf stretch — 90 sec each</li><li>Plantar fascia roll (ball) — 60 sec each</li><li>Ankle circles — 20 each direction</li></ul></div>
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted);">In Phase 3 reduce to 2 sessions/week. In taper: 1 session of mobility (C) only.</div>
+    </div>
+
+    <div class="tp-panel" id="plan5">
+      <div class="tp-injury-box">
+        <div class="tp-injury-title">Prevention rules</div>
+        <ul class="tp-injury-list">
+          <li>Never increase weekly km more than 10% week-on-week</li>
+          <li>Every 4th week is a deload — cut volume 30–40%</li>
+          <li>Resting HR 8+ bpm above normal: take the day off</li>
+          <li>Pain above 3/10 in any joint: stop the session</li>
+          <li>Soreness in muscle = ok. Pain in tendon or joint = stop</li>
+          <li>Never run two hard sessions back-to-back</li>
+          <li>Warm up 10 min easy before every speed session</li>
+          <li>Cool down 10 min easy + 5 min stretching after every run</li>
+        </ul>
+      </div>
+      <div class="tp-strength-grid" style="margin-bottom:14px">
+        <div class="tp-strength-card"><div class="tp-strength-title">1–3 days of discomfort</div><ul class="tp-strength-list"><li>Swap hard session for easy or rest</li><li>Ice 15 min after activity (not before)</li><li>Continue strength work if pain-free</li><li>Resume plan if pain gone within 3 days</li></ul></div>
+        <div class="tp-strength-card"><div class="tp-strength-title">4+ days or recurring pain</div><ul class="tp-strength-list"><li>Stop running. Maintain fitness with cycling or swimming</li><li>See a physio before resuming</li><li>Re-enter plan 2 phases back</li><li>Losing 2 weeks ≠ losing the goal. Panic does.</li></ul></div>
+      </div>
+      <div class="tp-strength-card">
+        <div class="tp-strength-title">Weekly schedule</div>
+        <ul class="tp-strength-list">
+          <li><strong>Monday</strong> — Intervals</li>
+          <li><strong>Tuesday</strong> — Rest (or Strength B)</li>
+          <li><strong>Wednesday</strong> — Easy run</li>
+          <li><strong>Thursday</strong> — Threshold / tempo</li>
+          <li><strong>Friday</strong> — Rest (or Strength C)</li>
+          <li><strong>Saturday</strong> — Long run</li>
+          <li><strong>Sunday</strong> — Rest (or Strength A)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- GUIDE -->
+<section class="section" id="guide">
+  <div class="section-label">Guide</div>
+  <div class="section-title">VO2 max training</div>
+  <div class="section-desc">What you need to know before your first high-intensity session.</div>
+  <div class="guide-grid">
+    <div class="guide-card"><div class="guide-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"><path d="M8 2v4l3 3"/><circle cx="8" cy="8" r="6"/></svg></div><h3>First session</h3><p>Start with 4 × 3 min at 90–95% max HR. Equal rest between reps. Leave reps in the tank — the goal is completion, not heroics.</p></div>
+    <div class="guide-card"><div class="guide-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"><path d="M2 12l4-4 3 3 5-7"/></svg></div><h3>Progressive overload</h3><p>Add one rep per week, or increase rep duration. Never increase both at once. Deload every 4th week — cut volume by 40%.</p></div>
+    <div class="guide-card"><div class="guide-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"><path d="M8 14s-6-4-6-8a6 6 0 0112 0c0 4-6 8-6 8z"/></svg></div><h3>10 km race</h3><p>A 10 km is run almost entirely at VO2 max intensity. Target sessions: 6 × 1 km at race pace with 90 sec recovery.</p></div>
+    <div class="guide-card"><div class="guide-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--accent)"><path d="M3 8h10M8 3l5 5-5 5"/></svg></div><h3>Half marathon</h3><p>HM sits at lactate threshold. VO2 max sessions raise your ceiling so threshold pace feels easier. Add cruise intervals: 3 × 10 min at HM pace.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span>RDA — Runner Data Analytics</span>
+  <span>Free running tools</span>
+</footer>
+
+</main>
+
+<script type="module" src="js/tools.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Analytics — RDA</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0f1a">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div id="app-nav"></div>
+
+<main id="app-content" hidden>
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">Analytics</div>
+    <div class="page-desc">Trends across your logged runs.</div>
+  </div>
+
+  <div class="period-tabs" id="period-tabs">
+    <button class="period-tab" data-weeks="4">4 weeks</button>
+    <button class="period-tab active" data-weeks="8">8 weeks</button>
+    <button class="period-tab" data-weeks="12">12 weeks</button>
+  </div>
+
+  <div class="stat-strip" id="stat-strip"></div>
+
+  <div class="chart-card">
+    <div class="chart-card-title">Runs by day</div>
+    <div class="chart-card-sub">Daily distance, coloured by run type</div>
+    <div class="chart-canvas-wrap"><canvas id="chart-type-day"></canvas></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-card-title">Average time by distance</div>
+    <div class="chart-card-sub">Grouped by standard race distance (±10%)</div>
+    <div id="bucket-list"></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-card-title">Heart rate trend</div>
+    <div class="chart-card-sub">Max / average / min per run over the selected period</div>
+    <div class="chart-canvas-wrap"><canvas id="chart-hr"></canvas></div>
+  </div>
+
+</div>
+</main>
+
+<script type="module" src="js/analytics.js"></script>
+</body>
+</html>
